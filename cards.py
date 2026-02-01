@@ -1,5 +1,20 @@
 from random import shuffle
 
+SUIT_SYMBOLS = {
+    "Hearts": "♥",
+    "Diamonds": "♦",
+    "Clubs": "♣",
+    "Spades": "♠",
+}
+
+
+SUITS = ["Diamonds",
+         "Hearts",
+         "Spades",
+         "Clubs"]
+
+RANKS = ["1","2","3","4","5","6","7","8","9","10","Jack","Queen","King"]
+
 class Card:
     def __init__(self,suit,rank):
         self.suit = suit
@@ -20,15 +35,10 @@ class Card:
 
         return self.point
 
+
     def __str__(self):
-        return (f"{self.rank} {self.suit}")
-
-SUITS = ["Diamonds",
-         "Hearts",
-         "Spades",
-         "Clubs"]
-
-RANKS = ["1","2","3","4","5","6","7","8","9","10","Jack","Queen","King"]
+        symbol = SUIT_SYMBOLS[self.suit]
+        return f"{symbol} {self.rank}"
 
 def get_cards():
     cards = []

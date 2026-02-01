@@ -1,3 +1,5 @@
+import time
+
 from cards import Card,get_cards
 from random import shuffle
 
@@ -17,12 +19,17 @@ def exe_round() -> tuple[int,int]:
     i = 1
     user_points = 0
     ai_points = 0
-    print("now the round starts.")
 
     while not done and user_points < 21:
         card = deal_card(cards)
         user_points += card.point
-        print(f"{i} card : {card}")
+        print(f"🃏 Card {i}: {card}", end="", flush=True)
+        time.sleep(0.6)
+        print(f"  → Total: {user_points}")
+
+        # print(f"🃏 Card {i}: {card}  → Total: {user_points}")
+
+        i += 1
         input_ = input("more ? [y/n]")
         if input_.lower() == "n":
             done = True
@@ -43,10 +50,12 @@ def exe_round() -> tuple[int,int]:
         if ai_points >= 17:
             ai_done = True
 
-    print("this round points : ") 
-    print(f"you : {user_points}")
-    print(f"ai : {ai_points}")
- 
+    print("\n" + "=" * 30)
+    print("🃏 ROUND RESULT")
+    print(f"🧑 Your points : {user_points}")
+    print(f"🤖 AI points   : {ai_points}")
+    print("=" * 30)
+
     return winner_state(user_points,ai_points)
 
 #if based on the points user is winner. it return 0.
@@ -70,15 +79,9 @@ def winner_state(user_points,
         return 0 
 
 def print_final_text(user_points , ai_points):
-    if user_points > ai_points:
-        print("you're the winner baby.")
-        print(f"you won {user_points}-{ai_points}")
-    
-    elif user_points < ai_points :
-        print("sorry for your loss to a bloody computer.")
-        print(f"you lose {ai_points}-{user_points}")
-    
-    else:
-        print("you draw. not bad . not good either.")
-        print(f"you draw by {ai_points}-{user_points}")
+    print("\n" + "=" * 40)
+    print("FINAL SCORE")
+    print("=" * 40)
+    print(f"🧑 You : {user_points} points")
+    print(f"🤖 AI  : {ai_points} points")
 
